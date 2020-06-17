@@ -8,12 +8,16 @@ Output: 5
  *
  */
 public class _434_NumberOfSegmentsInAString {
-	public int countSegments(String s) {
-		int result;
-		for (int i = 0; i < s.length(); i++) {
-			
+	public static int countSegments(String s) {
+		int result = 0;
+		for (int i = 0; i < s.trim().length(); i++) {
+			if (s.charAt(i) != ' ' && (i == 0 || s.charAt(i - 1) == ' ')) {
+				result++;
+			}
 		}
-		return 0;
+		return result;
 	}
-
+	public static void main(String[] args) {
+		System.out.println(countSegments("Hello, my name is John"));
+	}
 }
