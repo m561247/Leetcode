@@ -31,7 +31,7 @@ public class _38_CountAndSay {
 					curr.append(count).append(say);
 					count = 1;
 					say = prev.charAt(j);
-				}else
+				} else
 					count++;
 			}
 			curr.append(count).append(say);
