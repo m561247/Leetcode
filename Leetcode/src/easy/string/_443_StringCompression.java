@@ -34,27 +34,63 @@ Since the character "a" does not repeat, it is not compressed. "bbbbbbbbbbbb" is
 Notice each digit has it's own entry in the array.
  */
 public class _443_StringCompression { 
-	public static int compress(char[] chars) {
-        int indexAns = 0, index = 0;
-        
-        while (index < chars.length){
-            char currentChar = chars[index];
-            int count = 0;//紀錄多少個相同的char
-            while (index < chars.length && chars[index] == currentChar){
-                index++;
-                count++;
-            }
-            chars[indexAns++] = currentChar;
-            if (count != 1) {
-            	for (char c : Integer.toString(count).toCharArray()) {
-                	chars[indexAns++] = c;//
-                }
-            }
-        }
-        return indexAns;
-    }
+	
+//	public static int compress(char[] chars) {
+//        int indexAns = 0, index = 0;
+//        
+//        while (index < chars.length){
+//            char currentChar = chars[index];
+//            int count = 0;//紀錄多少個相同的char
+//            while (index < chars.length && chars[index] == currentChar){
+//                index++;
+//                count++;
+//            }
+//            chars[indexAns++] = currentChar;
+//            if (count != 1) {
+//            	for (char c : Integer.toString(count).toCharArray()) {
+//                	chars[indexAns++] = c;//
+//                }
+//            }
+//        }
+//        return indexAns;
+//    }
+	 public static int compress(char[] chars) {
+	        int index = 0, indexAns = 0;
+	        
+	        while (index < chars.length) {
+	            char current = chars[index];
+	            int count = 0; 
+	            
+	            while (index < chars.length && current == chars[index]) {
+	                index++;
+	                count++;
+	            }
+	            chars[indexAns++] = current; 
+	            
+	            if (count != 1) {
+	                int startIndexAns = indexAns;
+	                
+	                while (count != 0) {
+	                    chars[indexAns++] = (char) ((count % 10) + '0'); 
+	                    count /= 10;
+	                }
+	                int endIndexAns = indexAns; 
+	                indexAns--; 
+	                
+	                while (startIndexAns < indexAns) {
+	                    char temp = chars[startIndexAns];
+	                    chars[startIndexAns] = chars[indexAns];
+	                    chars[indexAns] = temp; 
+	                    startIndexAns++;
+	                    indexAns--;
+	                }
+	                indexAns = endIndexAns; 
+	            }
+	        }
+	        return indexAns;
+	    }
+	
 	public static void main(String[] args) {
-		String str = "abbbbbbbbbbbbbbbbbb";
-		compress(str.toCharArray());
+		compress("abbbbbbbbbbbb".toCharArray());
 	}
 }
