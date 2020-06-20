@@ -80,8 +80,7 @@ public class _443_StringCompression {
 	                   chars[indexAns++] = (char) ((count % 10) + '0'); 
 	                   count /= 10;
 	               }
-	               int endIndexAns = indexAns; 
-	               indexAns--; 	                
+	               int endIndexAns = indexAns--; 
 	               while (startIndexAns < indexAns) {
 	                   char temp = chars[startIndexAns];
 	                   chars[startIndexAns++] = chars[indexAns];
