@@ -81,7 +81,7 @@ public class _443_StringCompression {
 	                   count /= 10;
 	               }
 	               int endIndexAns = indexAns; 
-                indexAns--; 	                
+                       indexAns--; 	                
 	               while (startIndexAns < indexAns) {
 	                   char temp = chars[startIndexAns];
 	                   chars[startIndexAns] = chars[indexAns];
