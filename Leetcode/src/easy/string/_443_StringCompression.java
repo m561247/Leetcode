@@ -34,7 +34,9 @@ Since the character "a" does not repeat, it is not compressed. "bbbbbbbbbbbb" is
 Notice each digit has it's own entry in the array.
  */
 public class _443_StringCompression { 
-	
+	/*
+	 * version1 : 使用API:Integer.toString
+	 */
 //	public static int compress(char[] chars) {
 //        int indexAns = 0, index = 0;
 //        
@@ -54,41 +56,68 @@ public class _443_StringCompression {
 //        }
 //        return indexAns;
 //    }
-	 public static int compress(char[] chars) {
-	        int index = 0, indexAns = 0;
+	
+	/*
+	 * version2 : 改良自ver1，不使用API版
+	 */
+	public static int compress(char[] chars) {
+	       int index = 0, indexAns = 0;
 	        
-	        while (index < chars.length) {
-	            char current = chars[index];
-	            int count = 0; 
+	       while (index < chars.length) {
+	           char current = chars[index];
+	           int count = 0; 
 	            
-	            while (index < chars.length && current == chars[index]) {
-	                index++;
-	                count++;
-	            }
-	            chars[indexAns++] = current; 
-	            
-	            if (count != 1) {
-	                int startIndexAns = indexAns;
-	                
-	                while (count != 0) {
-	                    chars[indexAns++] = (char) ((count % 10) + '0'); 
-	                    count /= 10;
-	                }
-	                int endIndexAns = indexAns; 
-	                indexAns--; 
-	                
-	                while (startIndexAns < indexAns) {
-	                    char temp = chars[startIndexAns];
-	                    chars[startIndexAns] = chars[indexAns];
-	                    chars[indexAns] = temp; 
-	                    startIndexAns++;
-	                    indexAns--;
-	                }
-	                indexAns = endIndexAns; 
-	            }
-	        }
-	        return indexAns;
-	    }
+	           while (index < chars.length && current == chars[index]) {
+	               index++;
+	               count++;
+	           }
+	           chars[indexAns++] = current; 
+	           
+	           if (count != 1) {
+	               int startIndexAns = indexAns;
+	              
+	               while (count != 0) {
+	                   chars[indexAns++] = (char) ((count % 10) + '0'); 
+	                   count /= 10;
+	               }
+	               int endIndexAns = indexAns; 
+                indexAns--; 	                
+	               while (startIndexAns < indexAns) {
+	                   char temp = chars[startIndexAns];
+	                   chars[startIndexAns] = chars[indexAns];
+	                   chars[indexAns] = temp; 
+	                   startIndexAns++;
+	                   indexAns--;
+	               }
+	               indexAns = endIndexAns; 
+	           }
+	       }
+	       return indexAns;
+	   }
+	/*
+	 * ver3 
+	 */
+//	public int compress(char[] chars) {
+//    int count = 1; 
+//    int index = 0; 
+//    for (int i = 0; i < chars.length; i++) {
+//        while (i < chars.length - 1 && chars[i] == chars[i + 1]) {
+//            count++; 
+//            i++; 
+//        }
+//        if (count == 1) {
+//            chars[index++] = chars[i]; 
+//        } else {
+//            chars[index++] = chars[i]; 
+//            String num = String.valueOf(count); 
+//            for (int j = 0; j < num.length(); j++) {
+//                chars[index++] = num.charAt(j); 
+//            }
+//        }
+//        count = 1; 
+//    }
+//    return index; 
+//}
 	
 	public static void main(String[] args) {
 		compress("abbbbbbbbbbbb".toCharArray());
