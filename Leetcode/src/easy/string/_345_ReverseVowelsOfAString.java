@@ -7,70 +7,61 @@ import java.util.Stack;
  * 
  * 
  * 
- * public String reverseVowels(String s) {
-    if(s == null || s.length()==0) return s;
-    String vowels = "aeiouAEIOU";
-    char[] chars = s.toCharArray();
-    int start = 0;
-    int end = s.length()-1;
-    while(start<end){
-        
-        while(start<end && !vowels.contains(chars[start]+"")){
-            start++;
-        }
-        
-        while(start<end && !vowels.contains(chars[end]+"")){
-            end--;
-        }
-        
-        char temp = chars[start];
-        chars[start] = chars[end];
-        chars[end] = temp;
-        
-        start++;
-        end--;
-    }
-    return new String(chars);
-}
+ * public String reverseVowels(String s) { if(s == null || s.length()==0) return
+ * s; String vowels = "aeiouAEIOU"; char[] chars = s.toCharArray(); int start =
+ * 0; int end = s.length()-1; while(start<end){
+ * 
+ * while(start<end && !vowels.contains(chars[start]+"")){ start++; }
+ * 
+ * while(start<end && !vowels.contains(chars[end]+"")){ end--; }
+ * 
+ * char temp = chars[start]; chars[start] = chars[end]; chars[end] = temp;
+ * 
+ * start++; end--; } return new String(chars); }
  * 
  * 
  * Example 1:
-
-Input: "hello"
-Output: "holle"
-Example 2:
-
-Input: "leetcode"
-Output: "leotcede"
- * @author user
+ * 
+ * Input: "hello" 
+ * Output: "holle" 
+ * 
+ * Example 2:
+ * Input: "leetcode" 
+ * Output: "leotcede"
+ * 
  *
  */
 public class _345_ReverseVowelsOfAString {
-//	public static String reverseVowels(String s) {
-//		if (s == null || s.length() == 0) {
-//			return s;
-//		}
-//		String vowels = "aeiouAEIOU";
-//		char[] c = s.toCharArray();
-//		int start = 0;
-//		int end = s.length() - 1;
-//		while (start < end) {
-//			while (start < end && vowels.indexOf(c[start]) == -1) {
-//				start++;
-//			}
-//			while (start < end && vowels.indexOf(c[end]) == -1) {
-//				end--;
-//			}
-//			
-//			char temp = c[start];
-//			c[start] = c[end];
-//			c[end] = temp;
-//			start++;
-//			end--;
-//		}
-//		return new String(c);
-//	}
-	public static String reverseVowels(String s) {
+	/*
+	 * Solution_1 : by myself
+	 */
+	public static String reverseVowels_Sol_1(String s) {
+		if (s == null || s.length() == 0) {
+			return s;
+		}
+		String vowels = "aeiouAEIOU";
+		char[] c = s.toCharArray();
+		int start = 0;
+		int end = s.length() - 1;
+		while (start < end) {
+			while (start < end && vowels.indexOf(c[start]) == -1) {
+				start++;
+			}
+			while (start < end && vowels.indexOf(c[end]) == -1) {
+				end--;
+			}
+			char temp = c[start];
+			c[start] = c[end];
+			c[end] = temp;
+			start++;
+			end--;
+		}
+		return new String(c);
+	}
+	/*
+	 * Solution_2 : use stack
+	 */
+	public static String reverseVowels_Sol_2(String s) {
 		if (s == null || s.length() == 0) {
 			return s;
 		}
@@ -85,19 +76,15 @@ public class _345_ReverseVowelsOfAString {
 		for (char c : s.toCharArray()) {
 			if (vowels.contains(c + "")) {
 				sb.append(stack.pop());
-			}else {
+			} else {
 				sb.append(c);
 			}
 		}
 		return sb.toString();
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
 		String s = "leetcode";
 		String s2 = "Hello";
-		System.out.println(reverseVowels(s));
-		System.out.println(reverseVowels(s2));
 	}
 }
